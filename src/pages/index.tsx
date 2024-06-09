@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { HomeView } from "../views";
+import Leaderboard from "views/Leaderboard";
 
 const Home: NextPage = (props) => {
   return (
@@ -12,7 +13,7 @@ const Home: NextPage = (props) => {
           content="DPORT"
         />
       </Head>
-      <HomeView />
+      <Leaderboard />
     </div>
   );
 };
