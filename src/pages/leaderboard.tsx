@@ -6,7 +6,7 @@ const LeaderboardPage: NextPage = (props) => {
   return (
     <div>
       <Head>
-        <title>Solana Scaffold</title>
+        <title>DPORT</title>
         <meta
           name="description"
           content="Basic Functionality"

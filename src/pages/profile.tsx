@@ -1,20 +1,20 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { HomeView } from "../views";
+import Profile from "views/Profile";
 
-const Home: NextPage = (props) => {
+const ProfilePage: NextPage = (props) => {
   return (
     <div>
       <Head>
         <title>DPORT</title>
         <meta
           name="description"
-          content="DPORT"
+          content="Basic Functionality"
         />
       </Head>
-      <HomeView />
+      <Profile />
     </div>
   );
 };
 
-export default Home;
+export default ProfilePage;
