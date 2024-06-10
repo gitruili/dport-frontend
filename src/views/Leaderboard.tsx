@@ -17,33 +17,35 @@ const leaderboardData: LeaderboardEntry[] = [
 
 const Leaderboard: React.FC = () => {
   return (
-    <div>
-      <h2>Green Hero Leaderboard</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Rank#</th>
-            <th>UserID</th>
-            <th>CarModel</th>
-            <th>BattType</th>
-            <th>Score</th>
-          </tr>
-        </thead>
-        <tbody>
-          {leaderboardData.map((entry) => (
-            <tr key={entry.rank}>
-              <td>{entry.rank}</td>
-              <td>{entry.userId}</td>
-              <td>{entry.carModel}</td>
-              <td>{entry.battType}</td>
-              <td>{entry.score}</td>
+    <div className="container mx-auto p-4">
+      <h2 className="text-3xl font-semibold mb-6">Green Hero Leaderboard</h2>
+      <div className="overflow-x-auto">
+        <table className="table-auto w-full bg-gray-100 shadow-md rounded-lg text-lg">
+          <thead className="bg-gray-300 text-black">
+            <tr>
+              <th className="px-6 py-3">Rank#</th>
+              <th className="px-6 py-3">UserID</th>
+              <th className="px-6 py-3">Car Model</th>
+              <th className="px-6 py-3">Batt Type</th>
+              <th className="px-6 py-3">Score</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div>
-        <h3>How to earn points or $DPT token</h3>
-        <ul>
+          </thead>
+          <tbody className="text-black">
+            {leaderboardData.map((entry) => (
+              <tr key={entry.rank} className="border-t bg-white hover:bg-gray-200">
+                <td className="px-6 py-3 text-center">{entry.rank}</td>
+                <td className="px-6 py-3 text-center">{entry.userId}</td>
+                <td className="px-6 py-3 text-center">{entry.carModel}</td>
+                <td className="px-6 py-3 text-center">{entry.battType}</td>
+                <td className="px-6 py-3 text-center">{entry.score}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="mt-8">
+        <h3 className="text-xl font-semibold mb-4">How to earn points or $DPT token :</h3>
+        <ul className="list-disc list-inside ml-4 text-lg">
           <li>Drive smart with optimal battery charging</li>
           <li>Charge smart to optimal battery status</li>
           <li>Longer range using lower electricity</li>
@@ -52,7 +54,7 @@ const Leaderboard: React.FC = () => {
           <li>Higher remaining value gets higher points</li>
           <li>Stake $SOL to earn more points</li>
         </ul>
-        <p>
+        <p className="mt-4 text-lg">
           BMS/DePIN device/Mobile app can monitor required data and/or calculate based on AI.
         </p>
       </div>

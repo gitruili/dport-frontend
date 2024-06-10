@@ -131,7 +131,7 @@ export const Footer: FC = () => {
                             <h5 className="font-normal tracking-tight  mb-2.5">Privacy Policy</h5>
                         </div>
                         <div className="mb-6 items-center mx-auto max-w-screen-lg">
-                            <h5 className="font-normal tracking-tight  mb-2.5">Concat</h5>
+                            <h5 className="font-normal tracking-tight  mb-2.5">Contact</h5>
                         </div>
                     </div>
                 </div>
