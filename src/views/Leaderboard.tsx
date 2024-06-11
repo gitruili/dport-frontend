@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { fetchLeaderboard } from '../api';
 
 interface LeaderboardEntry {
   rank: number;
-  userId: string;
-  carModel: string;
-  battType: string;
+  name: string;
+  vehicle: string;
+  battery: string;
   score: number;
 }
 
-const leaderboardData: LeaderboardEntry[] = [
-  { rank: 1, userId: 'User1', carModel: 'Tesla Model S', battType: 'Li-Ion', score: 1000 },
-  { rank: 2, userId: 'User2', carModel: 'Nissan Leaf', battType: 'Li-Ion', score: 950 },
-  { rank: 3, userId: 'User3', carModel: 'Chevy Bolt', battType: 'Li-Ion', score: 900 },
-  // Add more entries as needed
-];
-
 const Leaderboard: React.FC = () => {
+  const [leaderboardData, setLeaderboardData] = useState<LeaderboardEntry[]>([]);
+
+  useEffect(() => {
+    const getLeaderboardData = async () => {
+      const data = await fetchLeaderboard();
+      if (data.status) {
+        setLeaderboardData(data.data);
+      }
+    };
+    getLeaderboardData();
+  }, []);
+
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-3xl font-semibold mb-6">Green Hero Leaderboard</h2>
@@ -34,9 +40,9 @@ const Leaderboard: React.FC = () => {
             {leaderboardData.map((entry) => (
               <tr key={entry.rank} className="border-t bg-white hover:bg-gray-200">
                 <td className="px-6 py-3 text-center">{entry.rank}</td>
-                <td className="px-6 py-3 text-center">{entry.userId}</td>
-                <td className="px-6 py-3 text-center">{entry.carModel}</td>
-                <td className="px-6 py-3 text-center">{entry.battType}</td>
+                <td className="px-6 py-3 text-center">{entry.name}</td>
+                <td className="px-6 py-3 text-center">{entry.vehicle}</td>
+                <td className="px-6 py-3 text-center">{entry.battery}</td>
                 <td className="px-6 py-3 text-center">{entry.score}</td>
               </tr>
             ))}

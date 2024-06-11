@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { addBattery, addVehicle } from '../api';
 
 const AddBatteryAndVehicle: React.FC = () => {
   const [batteryInfo, setBatteryInfo] = useState({
@@ -15,6 +16,11 @@ const AddBatteryAndVehicle: React.FC = () => {
     vin: '',
   });
 
+  const [message, setMessage] = useState<string | null>(null);
+  const [messageType, setMessageType] = useState<'success' | 'error' | null>(null);
+
+  const walletPublic = "FFkSMVqT3YohjBGVPa9C5VGE5UEN9ceszJ1PBoJiY2JN"; // Replace with actual wallet public key
+
   const handleBatteryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBatteryInfo({
       ...batteryInfo,
@@ -29,10 +35,24 @@ const AddBatteryAndVehicle: React.FC = () => {
     });
   };
 
-  const handleSubmit = () => {
-    // Implement submission logic for both battery and vehicle here
-    console.log('Battery Info:', batteryInfo);
-    console.log('Vehicle Info:', vehicleInfo);
+  const handleSubmit = async () => {
+    try {
+      const batteryResponse = await addBattery(walletPublic, batteryInfo.bin, batteryInfo.type, batteryInfo.model, batteryInfo.sn);
+      const vehicleResponse = await addVehicle(walletPublic, vehicleInfo.carPlate, vehicleInfo.make, vehicleInfo.model, vehicleInfo.vin);
+
+      if (batteryResponse.status === true && vehicleResponse.status === true) {
+        setMessage('Battery and Vehicle added successfully!');
+        setMessageType('success');
+        setBatteryInfo({ bin: '', model: '', type: '', sn: '' });
+        setVehicleInfo({ carPlate: '', make: '', model: '', vin: '' });
+      } else {
+        setMessage('Failed to add Battery or Vehicle. Please try again.');
+        setMessageType('error');
+      }
+    } catch (error) {
+      setMessage('Error adding Battery or Vehicle. Please try again.');
+      setMessageType('error');
+    }
   };
 
   return (
@@ -110,6 +130,11 @@ const AddBatteryAndVehicle: React.FC = () => {
         </div>
       </div>
       <button onClick={handleSubmit} className="btn btn-primary w-full mt-4">Submit</button>
+      {message && (
+        <div className={`mt-4 p-4 border rounded ${messageType === 'success' ? 'bg-green-200 border-green-600' : 'bg-red-200 border-red-600'}`}>
+          {message}
+        </div>
+      )}
     </div>
   );
 }
